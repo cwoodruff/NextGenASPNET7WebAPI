@@ -18,4 +18,5 @@
       <ProjectReference Include="..\Chinook.Domain\Chinook.Domain.csproj" />
     </ItemGroup>
 
+
 </Project>
