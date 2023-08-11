@@ -677,3 +677,4 @@ fabric.properties
 # End of https://www.toptal.com/developers/gitignore/api/rider,csharp,visualstudio,visualstudiocode
 .idea/.idea.NextGenASPNET7WebAPI/.idea/dataSources.xml
 .idea/.idea.NextGenASPNET7WebAPI/.idea/aws.xml
+.idea/
