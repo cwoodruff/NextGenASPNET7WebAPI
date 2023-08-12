@@ -675,6 +675,8 @@ fabric.properties
 # Additional files built by Visual Studio
 
 # End of https://www.toptal.com/developers/gitignore/api/rider,csharp,visualstudio,visualstudiocode
-.idea/.idea.NextGenASPNET7WebAPI/.idea/dataSources.xml
-.idea/.idea.NextGenASPNET7WebAPI/.idea/aws.xml
 .idea/
+
+.DS_Store
+.idea/.idea.NextGenASPNET7WebAPI/.idea/aws.xml
+.idea/.idea.NextGenASPNET7WebAPI/.idea/dataSources.xml
