@@ -7,6 +7,8 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <PackageReference Include="FluentValidation" Version="11.7.1" />
+      <PackageReference Include="Hellang.Middleware.ProblemDetails" Version="6.5.1" />
       <PackageReference Include="JetBrains.Annotations" Version="2023.2.0" />
     </ItemGroup>
 
