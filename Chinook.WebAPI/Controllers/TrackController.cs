@@ -53,7 +53,7 @@ public class TrackController : ControllerBase
         }
         catch (Exception ex)
         {
-            _logger.LogError($"Something went wrong inside the TrackController Get action: {ex}");
+            _logger.LogError("Something went wrong inside the TrackController Get action: {Ex}", ex);
             return StatusCode((int)HttpStatusCode.InternalServerError,
                 "Error occurred while executing Get All Tracks");
         }
@@ -76,7 +76,7 @@ public class TrackController : ControllerBase
         }
         catch (Exception ex)
         {
-            _logger.LogError($"Something went wrong inside the TrackController GetById action: {ex}");
+            _logger.LogError("Something went wrong inside the TrackController GetById action: {Ex}", ex);
             return StatusCode((int)HttpStatusCode.InternalServerError,
                 "Error occurred while executing Get Track By Id");
         }
@@ -85,25 +85,20 @@ public class TrackController : ControllerBase
     [HttpPost]
     [Produces("application/json")]
     [Consumes("application/json")]
-    public async Task<ActionResult<TrackApiModel>> Post([FromBody] TrackApiModel input)
+    public async Task<ActionResult<TrackApiModel>> Post([FromBody] TrackApiModel? input)
     {
         try
         {
-            if (input == null)
-            {
-                return StatusCode((int)HttpStatusCode.BadRequest, "Given Track is null");
-            }
-
-            return Ok(await _chinookSupervisor.AddTrack(input));
+            return input == null ? StatusCode((int)HttpStatusCode.BadRequest, "Given Track is null") : Ok(await _chinookSupervisor.AddTrack(input));
         }
         catch (ValidationException ex)
         {
-            _logger.LogError($"Something went wrong inside the TrackController Add Track action: {ex}");
+            _logger.LogError("Something went wrong inside the TrackController Add Track action: {Ex}", ex);
             return StatusCode((int)HttpStatusCode.InternalServerError, "Error occurred while executing Add Tracks");
         }
         catch (Exception ex)
         {
-            _logger.LogError($"Something went wrong inside the TrackController Add Track action: {ex}");
+            _logger.LogError("Something went wrong inside the TrackController Add Track action: {Ex}", ex);
             return StatusCode((int)HttpStatusCode.InternalServerError, "Error occurred while executing Add Tracks");
         }
     }
@@ -111,26 +106,21 @@ public class TrackController : ControllerBase
     [HttpPut("{id}")]
     [Produces("application/json")]
     [Consumes("application/json")]
-    public async Task<ActionResult<TrackApiModel>> Put(int id, [FromBody] TrackApiModel input)
+    public async Task<ActionResult<TrackApiModel>> Put(int id, [FromBody] TrackApiModel? input)
     {
         try
         {
-            if (input == null)
-            {
-                return StatusCode((int)HttpStatusCode.BadRequest, "Given Track is null");
-            }
-
-            return Ok(await _chinookSupervisor.UpdateTrack(input));
+            return input == null ? StatusCode((int)HttpStatusCode.BadRequest, "Given Track is null") : Ok(await _chinookSupervisor.UpdateTrack(input));
         }
         catch (ValidationException ex)
         {
-            _logger.LogError($"Something went wrong inside the TrackController Update Track action: {ex}");
+            _logger.LogError("Something went wrong inside the TrackController Update Track action: {Ex}", ex);
             return StatusCode((int)HttpStatusCode.InternalServerError,
                 "Error occurred while executing Update Tracks");
         }
         catch (Exception ex)
         {
-            _logger.LogError($"Something went wrong inside the TrackController Update Track action: {ex}");
+            _logger.LogError("Something went wrong inside the TrackController Update Track action: {Ex}", ex);
             return StatusCode((int)HttpStatusCode.InternalServerError,
                 "Error occurred while executing Update Tracks");
         }
@@ -145,7 +135,7 @@ public class TrackController : ControllerBase
         }
         catch (Exception ex)
         {
-            _logger.LogError($"Something went wrong inside the TrackController Delete action: {ex}");
+            _logger.LogError("Something went wrong inside the TrackController Delete action: {Ex}", ex);
             return StatusCode((int)HttpStatusCode.InternalServerError,
                 "Error occurred while executing Delete Track");
         }
@@ -178,7 +168,7 @@ public class TrackController : ControllerBase
         }
         catch (Exception ex)
         {
-            _logger.LogError($"Something went wrong inside the TrackController Get By Artist action: {ex}");
+            _logger.LogError("Something went wrong inside the TrackController Get By Artist action: {Ex}", ex);
             return StatusCode((int)HttpStatusCode.InternalServerError,
                 "Error occurred while executing Get All Tracks for Artist");
         }
@@ -211,7 +201,7 @@ public class TrackController : ControllerBase
         }
         catch (Exception ex)
         {
-            _logger.LogError($"Something went wrong inside the TrackController Get By Invoice action: {ex}");
+            _logger.LogError("Something went wrong inside the TrackController Get By Invoice action: {Ex}", ex);
             return StatusCode((int)HttpStatusCode.InternalServerError,
                 "Error occurred while executing Get All Tracks for Invoice");
         }
@@ -225,26 +215,25 @@ public class TrackController : ControllerBase
         {
             var tracks = await _chinookSupervisor.GetTrackByAlbumId(id, pageNumber, pageSize);
 
-            if (tracks.Any())
+            if (tracks != null && !tracks.Any())
+                return StatusCode((int)HttpStatusCode.NotFound, "No Tracks Could Be Found for the Album");
+            
+            var metadata = new
             {
-                var metadata = new
-                {
-                    tracks.TotalCount,
-                    tracks.PageSize,
-                    tracks.CurrentPage,
-                    tracks.TotalPages,
-                    tracks.HasNext,
-                    tracks.HasPrevious
-                };
-                Response.Headers.Add("X-Pagination", JsonSerializer.Serialize(metadata));
-                return Ok(tracks);
-            }
+                tracks.TotalCount,
+                tracks.PageSize,
+                tracks.CurrentPage,
+                tracks.TotalPages,
+                tracks.HasNext,
+                tracks.HasPrevious
+            };
+            Response.Headers.Add("X-Pagination", JsonSerializer.Serialize(metadata));
+            return Ok(tracks);
 
-            return StatusCode((int)HttpStatusCode.NotFound, "No Tracks Could Be Found for the Album");
         }
         catch (Exception ex)
         {
-            _logger.LogError($"Something went wrong inside the TrackController Get By Album action: {ex}");
+            _logger.LogError("Something went wrong inside the TrackController Get By Album action: {Ex}", ex);
             return StatusCode((int)HttpStatusCode.InternalServerError,
                 "Error occurred while executing Get All Tracks for Album");
         }
@@ -277,7 +266,7 @@ public class TrackController : ControllerBase
         }
         catch (Exception ex)
         {
-            _logger.LogError($"Something went wrong inside the TrackController Get By Media Type action: {ex}");
+            _logger.LogError("Something went wrong inside the TrackController Get By Media Type action: {Ex}", ex);
             return StatusCode((int)HttpStatusCode.InternalServerError,
                 "Error occurred while executing Get All Tracks for Media Type");
         }
@@ -310,7 +299,7 @@ public class TrackController : ControllerBase
         }
         catch (Exception ex)
         {
-            _logger.LogError($"Something went wrong inside the TrackController Get By Genre action: {ex}");
+            _logger.LogError("Something went wrong inside the TrackController Get By Genre action: {Ex}", ex);
             return StatusCode((int)HttpStatusCode.InternalServerError,
                 "Error occurred while executing Get All Tracks for Genre");
         }

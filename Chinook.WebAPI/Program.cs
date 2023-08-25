@@ -13,7 +13,6 @@ builder.Services.AddAPILogging();
 builder.Services.AddCORS();
 builder.Services.AddHealthChecks();
 builder.Services.AddCaching(builder.Configuration);
-//builder.Services.AddIdentity(builder.Configuration);
 builder.Services.AddVersioning();
 builder.Services.AddApiExplorer();
 builder.Services.AddSwaggerServices();

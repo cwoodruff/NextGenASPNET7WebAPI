@@ -83,8 +83,7 @@ public static class ServicesConfiguration
         });
     }
 
-    public static void AddCaching(this IServiceCollection services,
-        IConfiguration configuration)
+    public static void AddCaching(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddResponseCaching();
         services.AddMemoryCache();

@@ -10,30 +10,13 @@ public partial class ChinookSupervisor
     {
         var tracks = await _trackRepository!.GetAll(pageNumber, pageSize);
         var trackApiModels = tracks.ConvertAll().ToList();
-
-        // foreach (var track in trackApiModels)
-        // {
-        //     DistributedCacheEntryOptions cacheEntryOptions = new DistributedCacheEntryOptions();
-        //     cacheEntryOptions.SetSlidingExpiration(TimeSpan.FromSeconds(3600));
-        //     cacheEntryOptions.AbsoluteExpirationRelativeToNow = TimeSpan.FromSeconds(86400);
-        //
-        //     await _distributedCache!.SetStringAsync($"Track-{track.Id}", JsonSerializer.Serialize(track),
-        //         cacheEntryOptions);
-        // }
+        
         var newPagedList = new PagedList<TrackApiModel>(trackApiModels, tracks.TotalCount, tracks.CurrentPage, tracks.PageSize);
         return newPagedList;
     }
 
     public async Task<TrackApiModel?> GetTrackById(int? id)
     {
-        //var trackApiModelCached = await _distributedCache!.GetStringAsync($"Track-{id}");
-
-        // if (trackApiModelCached != null)
-        // {
-        //     return JsonSerializer.Deserialize<TrackApiModel>(trackApiModelCached);
-        // }
-        // else
-        // {
             var track = await _trackRepository!.GetById(id);
             if (track == null) return null;
             var trackApiModel = track.Convert();
@@ -46,7 +29,6 @@ public partial class ChinookSupervisor
             if (trackApiModel.Genre != null) trackApiModel.GenreName = trackApiModel.Genre.Name;
 
             return trackApiModel;
-        // }
     }
 
     public async Task<TrackApiModel> AddTrack(TrackApiModel newTrackApiModel)
