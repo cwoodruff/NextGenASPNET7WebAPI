@@ -1,6 +1,8 @@
-﻿namespace Chinook.Domain.ApiModels;
+﻿using Chinook.Domain.Helpers;
 
-public class BaseApiModel
+namespace Chinook.Domain.ApiModels;
+
+public class BaseApiModel : Representation
 {
     public int Id { get; set; }
 }

@@ -4,5 +4,4 @@ namespace Chinook.Domain.Repositories;
 
 public interface IGenreRepository : IRepository<Genre>, IDisposable
 {
-    
 }

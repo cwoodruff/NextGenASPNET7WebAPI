@@ -1,5 +1,4 @@
 using Grpc.Core;
-using Chinook.gRPC;
 
 namespace Chinook.gRPC.Services;
 

@@ -1,5 +1,6 @@
-﻿using System.Linq.Expressions;
+using System.Linq.Expressions;
 using Chinook.Domain.Entities;
+using Chinook.Domain.Extensions;
 using Chinook.Domain.Repositories;
 using Chinook.EFCoreData.Data;
 using Microsoft.EntityFrameworkCore;
@@ -14,14 +15,18 @@ public class BaseRepository<T> : IRepository<T> where T : BaseEntity
     {
         _context = context;
     }
+    
+    public void Dispose() => _context.Dispose();
 
-    public async Task<bool> EntityExists(int id) =>
+    public async Task<bool> EntityExists(int? id) =>
         await _context.Set<T>().AnyAsync(a => a.Id == id);
 
-    public async Task<List<T>> GetAll() =>
-        await _context.Set<T>().AsNoTrackingWithIdentityResolution().ToListAsync();
+    public async Task<PagedList<T>> GetAll(int pageNumber, int pageSize) =>
+        await PagedList<T>.ToPagedListAsync(_context.Set<T>().AsNoTrackingWithIdentityResolution(),
+            pageNumber,
+            pageSize);
 
-    public async Task<T?> GetById(int id) => await _context.Set<T>().SingleAsync(e => e.Id == id);
+    public async Task<T?> GetById(int? id) => await _context.Set<T>().SingleAsync(e => e.Id == id);
 
     public async Task<T> Add(T entity)
     {

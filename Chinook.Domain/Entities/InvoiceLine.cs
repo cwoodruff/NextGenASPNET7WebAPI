@@ -1,10 +1,13 @@
-﻿namespace Chinook.Domain.Entities;
+﻿using Chinook.Domain.ApiModels;
+using Chinook.Domain.Converters;
 
-public partial class InvoiceLine : BaseEntity
+namespace Chinook.Domain.Entities;
+
+public partial class InvoiceLine : BaseEntity, IConvertModel<InvoiceLineApiModel>
 {
-    public int InvoiceId { get; set; }
+    public int? InvoiceId { get; set; }
 
-    public int TrackId { get; set; }
+    public int? TrackId { get; set; }
 
     public decimal UnitPrice { get; set; }
 
@@ -13,4 +16,14 @@ public partial class InvoiceLine : BaseEntity
     public virtual Invoice Invoice { get; set; } = null!;
 
     public virtual Track Track { get; set; } = null!;
+    
+    public InvoiceLineApiModel Convert() =>
+        new()
+        {
+            Id = Id,
+            InvoiceId = InvoiceId,
+            TrackId = TrackId,
+            UnitPrice = UnitPrice,
+            Quantity = Quantity
+        };
 }

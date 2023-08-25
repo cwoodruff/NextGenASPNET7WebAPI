@@ -1,8 +1,18 @@
-﻿namespace Chinook.Domain.Entities;
+﻿using Chinook.Domain.ApiModels;
+using Chinook.Domain.Converters;
 
-public partial class Playlist : BaseEntity
+namespace Chinook.Domain.Entities;
+
+public partial class Playlist : BaseEntity, IConvertModel<PlaylistApiModel>
 {
     public string? Name { get; set; }
 
     public virtual ICollection<Track> Tracks { get; set; } = new List<Track>();
+    
+    public PlaylistApiModel Convert() =>
+        new()
+        {
+            Id = Id,
+            Name = Name
+        };
 }

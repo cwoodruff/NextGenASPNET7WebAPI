@@ -1,8 +1,18 @@
-﻿namespace Chinook.Domain.Entities;
+﻿using Chinook.Domain.ApiModels;
+using Chinook.Domain.Converters;
 
-public partial class Artist : BaseEntity
+namespace Chinook.Domain.Entities;
+
+public partial class Artist : BaseEntity, IConvertModel<ArtistApiModel>
 {
     public string? Name { get; set; }
 
     public virtual ICollection<Album> Albums { get; set; } = new List<Album>();
+    
+    public ArtistApiModel Convert() =>
+        new()
+        {
+            Id = Id,
+            Name = Name
+        };
 }

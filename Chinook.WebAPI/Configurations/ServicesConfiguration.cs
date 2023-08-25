@@ -1,13 +1,19 @@
+using Chinook.Domain.ApiModels;
+using Chinook.Domain.Enrichers;
+using Chinook.Domain.Helpers;
 using Chinook.Domain.Repositories;
 using Chinook.Domain.Supervisor;
+using Chinook.Domain.Validation;
 using Chinook.EFCoreData.Repositories;
+using FluentValidation;
+using FluentValidation.AspNetCore;
+using Hellang.Middleware.ProblemDetails;
 using Microsoft.AspNetCore.HttpLogging;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
-using Hellang.Middleware.ProblemDetails;
 
 namespace Chinook.WebAPI.Configurations;
 
@@ -51,20 +57,20 @@ public static class ServicesConfiguration
         });
     }
 
-    // public static void ConfigureValidators(this IServiceCollection services)
-    // {
-    //     services.AddFluentValidationAutoValidation()
-    //         .AddTransient<IValidator<AlbumApiModel>, AlbumValidator>()
-    //         .AddTransient<IValidator<ArtistApiModel>, ArtistValidator>()
-    //         .AddTransient<IValidator<CustomerApiModel>, CustomerValidator>()
-    //         .AddTransient<IValidator<EmployeeApiModel>, EmployeeValidator>()
-    //         .AddTransient<IValidator<GenreApiModel>, GenreValidator>()
-    //         .AddTransient<IValidator<InvoiceApiModel>, InvoiceValidator>()
-    //         .AddTransient<IValidator<InvoiceLineApiModel>, InvoiceLineValidator>()
-    //         .AddTransient<IValidator<MediaTypeApiModel>, MediaTypeValidator>()
-    //         .AddTransient<IValidator<PlaylistApiModel>, PlaylistValidator>()
-    //         .AddTransient<IValidator<TrackApiModel>, TrackValidator>();
-    // }
+    public static void ConfigureValidators(this IServiceCollection services)
+    {
+        services.AddFluentValidationAutoValidation()
+            .AddTransient<IValidator<AlbumApiModel>, AlbumValidator>()
+            .AddTransient<IValidator<ArtistApiModel>, ArtistValidator>()
+            .AddTransient<IValidator<CustomerApiModel>, CustomerValidator>()
+            .AddTransient<IValidator<EmployeeApiModel>, EmployeeValidator>()
+            .AddTransient<IValidator<GenreApiModel>, GenreValidator>()
+            .AddTransient<IValidator<InvoiceApiModel>, InvoiceValidator>()
+            .AddTransient<IValidator<InvoiceLineApiModel>, InvoiceLineValidator>()
+            .AddTransient<IValidator<MediaTypeApiModel>, MediaTypeValidator>()
+            .AddTransient<IValidator<PlaylistApiModel>, PlaylistValidator>()
+            .AddTransient<IValidator<TrackApiModel>, TrackValidator>();
+    }
 
     public static void AddCORS(this IServiceCollection services)
     {
@@ -98,12 +104,6 @@ public static class ServicesConfiguration
         });
     }
 
-    public static void AddSwaggerServices(this IServiceCollection services)
-    {
-        services.AddSwaggerGen();
-        services.ConfigureOptions<ConfigureSwaggerOptions>();
-    }
-
     public static void AddApiExplorer(this IServiceCollection services)
     {
         services.AddVersionedApiExplorer(setup =>
@@ -111,6 +111,16 @@ public static class ServicesConfiguration
             setup.GroupNameFormat = "'v'VVV";
             setup.SubstituteApiVersionInUrl = true;
         });
+    }
+    
+    public static void AddSwaggerServices(this IServiceCollection services)
+    {
+        services.AddSwaggerGen(options => {
+            // for further customization
+            //options.OperationFilter<DefaultValuesFilter>();
+        });
+        services.AddSwaggerGen();
+        services.ConfigureOptions<ConfigureSwaggerOptions>();
     }
 
     public static void AddProblemDetail(this IServiceCollection services)
@@ -126,6 +136,19 @@ public static class ServicesConfiguration
                 };
             }
         );
+    }
+    
+    public static void AddRepresentations(this IServiceCollection services)
+    {
+        services .AddScoped<AlbumEnricher>()
+            .AddScoped<IEnricher, AlbumEnricher>()
+            .AddScoped<AlbumsEnricher>()
+            .AddScoped<IListEnricher, AlbumsEnricher>();
+        
+        services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
+        services.AddScoped<RepresentationEnricher>();
+        services.AddScoped<ListRepresentationEnricher>();
     }
 }
 
@@ -159,8 +182,8 @@ public class ConfigureSwaggerOptions : IConfigureNamedOptions<SwaggerGenOptions>
     {
         var info = new OpenApiInfo()
         {
-            Version = "v1",
             Title = "Chinook Music Store API",
+            Version = description.ApiVersion.ToString(),
             Description = "A simple example ASP.NET Core Web API",
             TermsOfService = new Uri("https://example.com/terms"),
             Contact = new OpenApiContact

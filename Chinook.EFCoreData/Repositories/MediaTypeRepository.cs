@@ -6,12 +6,7 @@ namespace Chinook.EFCoreData.Repositories;
 
 public class MediaTypeRepository : BaseRepository<MediaType>, IMediaTypeRepository
 {
-    protected MediaTypeRepository(ChinookContext context) : base(context)
+    public MediaTypeRepository(ChinookContext context) : base(context)
     {
-    }
-
-    public void Dispose()
-    {
-        throw new NotImplementedException();
     }
 }

@@ -1,12 +1,15 @@
-﻿namespace Chinook.Domain.ApiModels;
+﻿using Chinook.Domain.Converters;
+using Chinook.Domain.Entities;
 
-public partial class TrackApiModel : BaseApiModel
+namespace Chinook.Domain.ApiModels;
+
+public partial class TrackApiModel : BaseApiModel, IConvertModel<Track>
 {
     public string Name { get; set; } = null!;
 
     public int? AlbumId { get; set; }
 
-    public int MediaTypeId { get; set; }
+    public int? MediaTypeId { get; set; }
 
     public int? GenreId { get; set; }
 
@@ -24,7 +27,24 @@ public partial class TrackApiModel : BaseApiModel
 
     public virtual ICollection<InvoiceLineApiModel> InvoiceLines { get; set; } = new List<InvoiceLineApiModel>();
 
-    public virtual MediaTypeApiModel MediaType { get; set; } = null!;
+    public virtual MediaTypeApiModel? MediaType { get; set; } = null!;
 
     public virtual ICollection<PlaylistApiModel> Playlists { get; set; } = new List<PlaylistApiModel>();
+    public string AlbumName { get; set; }
+    public string? MediaTypeName { get; set; }
+    public string? GenreName { get; set; }
+
+    public Track Convert() =>
+        new()
+        {
+            Id = Id,
+            Name = Name,
+            AlbumId = AlbumId,
+            MediaTypeId = MediaTypeId,
+            GenreId = GenreId,
+            Composer = Composer,
+            Milliseconds = Milliseconds,
+            Bytes = Bytes,
+            UnitPrice = UnitPrice
+        };
 }

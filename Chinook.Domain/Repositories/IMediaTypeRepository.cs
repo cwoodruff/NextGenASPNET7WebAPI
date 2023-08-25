@@ -4,5 +4,4 @@ namespace Chinook.Domain.Repositories;
 
 public interface IMediaTypeRepository : IRepository<MediaType>, IDisposable
 {
-    
 }

@@ -6,12 +6,7 @@ namespace Chinook.EFCoreData.Repositories;
 
 public class ArtistRepository : BaseRepository<Artist>, IArtistRepository
 {
-    protected ArtistRepository(ChinookContext context) : base(context)
+    public ArtistRepository(ChinookContext context) : base(context)
     {
-    }
-
-    public void Dispose()
-    {
-        throw new NotImplementedException();
     }
 }

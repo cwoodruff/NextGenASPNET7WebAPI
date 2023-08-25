@@ -1,6 +1,9 @@
-﻿namespace Chinook.Domain.ApiModels;
+﻿using Chinook.Domain.Converters;
+using Chinook.Domain.Entities;
 
-public partial class EmployeeApiModel : BaseApiModel
+namespace Chinook.Domain.ApiModels;
+
+public partial class EmployeeApiModel : BaseApiModel, IConvertModel<Employee>
 {
     public string LastName { get; set; } = null!;
 
@@ -35,4 +38,24 @@ public partial class EmployeeApiModel : BaseApiModel
     public virtual ICollection<EmployeeApiModel> InverseReportsToNavigation { get; set; } = new List<EmployeeApiModel>();
 
     public virtual EmployeeApiModel? ReportsToNavigation { get; set; }
+    
+    public Employee Convert() =>
+        new()
+        {
+            Id = Id,
+            LastName = LastName ?? string.Empty,
+            FirstName = FirstName ?? string.Empty,
+            Title = Title ?? string.Empty,
+            ReportsTo = ReportsTo,
+            BirthDate = BirthDate,
+            HireDate = HireDate,
+            Address = Address ?? string.Empty,
+            City = City ?? string.Empty,
+            State = State ?? string.Empty,
+            Country = Country ?? string.Empty,
+            PostalCode = PostalCode ?? string.Empty,
+            Phone = Phone ?? string.Empty,
+            Fax = Fax ?? string.Empty,
+            Email = Email ?? string.Empty
+        };
 }

@@ -6,12 +6,9 @@ namespace Chinook.EFCoreData.Repositories;
 
 public class GenreRepository : BaseRepository<Genre>, IGenreRepository
 {
-    protected GenreRepository(ChinookContext context) : base(context)
+    public GenreRepository(ChinookContext context) : base(context)
     {
     }
 
-    public void Dispose()
-    {
-        throw new NotImplementedException();
-    }
+    public void Dispose() => _context.Dispose();
 }

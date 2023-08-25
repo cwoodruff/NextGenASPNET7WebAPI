@@ -1,8 +1,11 @@
-﻿namespace Chinook.Domain.ApiModels;
+﻿using Chinook.Domain.Converters;
+using Chinook.Domain.Entities;
 
-public partial class InvoiceApiModel : BaseApiModel
+namespace Chinook.Domain.ApiModels;
+
+public partial class InvoiceApiModel : BaseApiModel, IConvertModel<Invoice>
 {
-    public int CustomerId { get; set; }
+    public int? CustomerId { get; set; }
 
     public DateTime InvoiceDate { get; set; }
 
@@ -21,4 +24,18 @@ public partial class InvoiceApiModel : BaseApiModel
     public virtual CustomerApiModel Customer { get; set; } = null!;
 
     public virtual ICollection<InvoiceLineApiModel> InvoiceLines { get; set; } = new List<InvoiceLineApiModel>();
+    
+    public Invoice Convert() =>
+        new()
+        {
+            Id = Id,
+            CustomerId = CustomerId,
+            InvoiceDate = InvoiceDate,
+            BillingAddress = BillingAddress,
+            BillingCity = BillingCity,
+            BillingState = BillingState,
+            BillingCountry = BillingCountry,
+            BillingPostalCode = BillingPostalCode,
+            Total = Total
+        };
 }
