@@ -1,6 +1,13 @@
-var builder = WebApplication.CreateBuilder(args);
-var app = builder.Build();
+using Chinook.MinAPI.Api;
+using Chinook.MinAPI.Bootstrapper;
 
-app.MapGet("/", () => "Hello World!");
+var app = AppBuilder.GetApp(args);
 
+// Configure Request Pipeline
+RequestPipelineBuilder.Configure(app);
+
+// Configure APIs 
+AlbumsApi.RegisterApis(app);
+
+// Start the app
 app.Run();
