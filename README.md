@@ -1,5 +1,5 @@
 # NextGenASPNET7WebAPI
-Starting with a clean repo building an ASP.NET 7 Web API with updated practices. This will contain the following endpoint projects:
+Starting with a clean repo building an ASP.NET 7 with updated practices. This will contain the following endpoint projects:
 
  
 
@@ -15,6 +15,6 @@ Starting with a clean repo building an ASP.NET 7 Web API with updated practices.
 | DDDAPI          |        |           |
 
 
-Also included are common projects for Domain and Data Accesses along with Testing projects.
+Also included are common projects for Domain and a few Data Access methods along with testing projects.
 
 Please get the Chinook database that the solution uses at [Chinook Database GitHub repo](https://github.com/cwoodruff/ChinookDatabase).
