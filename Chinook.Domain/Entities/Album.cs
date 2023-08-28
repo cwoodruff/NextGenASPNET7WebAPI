@@ -12,7 +12,7 @@ public partial class Album : BaseEntity, IConvertModel<AlbumApiModel>
     public virtual Artist Artist { get; set; } = null!;
 
     public virtual ICollection<Track> Tracks { get; set; } = new List<Track>();
-    
+
     public AlbumApiModel Convert() =>
         new()
         {

@@ -13,7 +13,7 @@ public partial class InvoiceLineApiModel : BaseApiModel, IConvertModel<InvoiceLi
     public virtual InvoiceApiModel Invoice { get; set; } = null!;
 
     public virtual TrackApiModel Track { get; set; } = null!;
-    
+
     public InvoiceLine Convert() =>
         new()
         {

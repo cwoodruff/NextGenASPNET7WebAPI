@@ -27,7 +27,8 @@ public class MediaTypeController : ControllerBase
 
     [HttpGet]
     [Produces("application/json")]
-    public async Task<ActionResult<PagedList<MediaTypeApiModel>>> Get([FromQuery] int pageNumber, [FromQuery] int pageSize)
+    public async Task<ActionResult<PagedList<MediaTypeApiModel>>> Get([FromQuery] int pageNumber,
+        [FromQuery] int pageSize)
     {
         try
         {

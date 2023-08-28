@@ -11,7 +11,7 @@ public partial class ChinookSupervisor
     {
         var customers = await _customerRepository!.GetAll(pageNumber, pageSize);
         var customerApiModels = customers.ConvertAll().ToList();
-        
+
         foreach (var customer in customerApiModels)
         {
             var cacheEntryOptions =
@@ -19,7 +19,9 @@ public partial class ChinookSupervisor
                     .AbsoluteExpirationRelativeToNow = TimeSpan.FromSeconds(604800);
             _cache!.Set(string.Concat("Customer-", customer.Id), customer, (TimeSpan)cacheEntryOptions);
         }
-        var newPagedList = new PagedList<CustomerApiModel>(customerApiModels, customers.TotalCount, customers.CurrentPage, customers.PageSize);
+
+        var newPagedList = new PagedList<CustomerApiModel>(customerApiModels, customers.TotalCount,
+            customers.CurrentPage, customers.PageSize);
         return newPagedList;
     }
 
@@ -65,7 +67,9 @@ public partial class ChinookSupervisor
                     .AbsoluteExpirationRelativeToNow = TimeSpan.FromSeconds(604800);
             _cache!.Set(string.Concat("Customer-", customer.Id), customer, (TimeSpan)cacheEntryOptions);
         }
-        var newPagedList = new PagedList<CustomerApiModel>(customerApiModels.ToList(), customers.TotalCount, customers.CurrentPage, customers.PageSize);
+
+        var newPagedList = new PagedList<CustomerApiModel>(customerApiModels.ToList(), customers.TotalCount,
+            customers.CurrentPage, customers.PageSize);
         return newPagedList;
     }
 

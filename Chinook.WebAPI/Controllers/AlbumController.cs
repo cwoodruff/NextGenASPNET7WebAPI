@@ -47,9 +47,8 @@ public class AlbumController : ControllerBase
                     albums.HasPrevious
                 };
                 Response.Headers.Add("X-Pagination", JsonSerializer.Serialize(metadata));
-                
-                
-                
+
+
                 return Ok(albums);
             }
 
@@ -291,7 +290,8 @@ public class AlbumController : ControllerBase
     }
 
     [HttpGet("artist/{id}")]
-    public async Task<ActionResult<PagedList<AlbumApiModel>>> GetByArtistId(int id, [FromQuery] int pageNumber, [FromQuery] int pageSize)
+    public async Task<ActionResult<PagedList<AlbumApiModel>>> GetByArtistId(int id, [FromQuery] int pageNumber,
+        [FromQuery] int pageSize)
     {
         try
         {
@@ -309,7 +309,7 @@ public class AlbumController : ControllerBase
                     albums.HasPrevious
                 };
                 Response.Headers.Add("X-Pagination", JsonSerializer.Serialize(metadata));
-                
+
                 return Ok(albums);
             }
 

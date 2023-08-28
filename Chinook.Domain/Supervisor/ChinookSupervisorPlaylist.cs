@@ -20,7 +20,9 @@ public partial class ChinookSupervisor
 
             _cache!.Set(string.Concat("Playlist-", playList.Id), playList, (TimeSpan)cacheEntryOptions);
         }
-        var newPagedList = new PagedList<PlaylistApiModel>(playlistApiModels, playlists.TotalCount, playlists.CurrentPage, playlists.PageSize);
+
+        var newPagedList = new PagedList<PlaylistApiModel>(playlistApiModels, playlists.TotalCount,
+            playlists.CurrentPage, playlists.PageSize);
         return newPagedList;
     }
 

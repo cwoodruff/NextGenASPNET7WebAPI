@@ -9,7 +9,7 @@ public partial class ChinookContext : DbContext
         : base(options)
     {
     }
-    
+
     // Compiled Queries
 
     public Task<bool> AlbumExists(int id) => _queryAlbumExists(this, id);
@@ -46,7 +46,8 @@ public partial class ChinookContext : DbContext
 
     public Task<InvoiceLine?> GetInvoiceLine(int id) => _queryGetInvoiceLine(this, id);
 
-    public IAsyncEnumerable<InvoiceLine> GetInvoiceLinesByInvoiceId(int id) => _queryGetInvoiceLinesByInvoiceId(this, id);
+    public IAsyncEnumerable<InvoiceLine> GetInvoiceLinesByInvoiceId(int id) =>
+        _queryGetInvoiceLinesByInvoiceId(this, id);
 
     public IAsyncEnumerable<InvoiceLine> GetInvoiceLinesByTrackId(int id) => _queryGetInvoiceLinesByTrackId(this, id);
 
@@ -83,12 +84,12 @@ public partial class ChinookContext : DbContext
     public IAsyncEnumerable<Invoice> GetInvoicesByEmployeeId(int id) => _queryGetInvoicesByEmployeeId(this, id);
 
     public IAsyncEnumerable<Track> GetTracksByPlaylistId(int id) => _queryGetTracksByPlaylistId(this, id);
-    
+
     // 
-    
+
     private static readonly Func<ChinookContext, int, Task<bool>> _queryAlbumExists =
         EF.CompileAsyncQuery((ChinookContext db, int id) => db.Albums.Any(a => a.Id == id));
-    
+
     private static readonly Func<ChinookContext, IAsyncEnumerable<Album>> _queryGetAllAlbums =
         EF.CompileAsyncQuery((ChinookContext db) => db.Albums);
 
@@ -167,9 +168,10 @@ public partial class ChinookContext : DbContext
 
     private static readonly Func<ChinookContext, int, Task<Playlist?>> _queryGetPlaylist =
         EF.CompileAsyncQuery((ChinookContext db, int id) => db.Playlists.FirstOrDefault(p => p.Id == id));
-    
+
     private static readonly Func<ChinookContext, int, IAsyncEnumerable<Playlist>> _queryGetPlaylistsByTrackId =
-        EF.CompileAsyncQuery((ChinookContext db, int id) => db.Tracks.Where(t => t.Id == id).SelectMany(t => t.Playlists));
+        EF.CompileAsyncQuery((ChinookContext db, int id) =>
+            db.Tracks.Where(t => t.Id == id).SelectMany(t => t.Playlists));
 
     private static readonly Func<ChinookContext, IAsyncEnumerable<Track>> _queryGetAllTracks =
         EF.CompileAsyncQuery((ChinookContext db) => db.Tracks);
@@ -187,16 +189,20 @@ public partial class ChinookContext : DbContext
         EF.CompileAsyncQuery((ChinookContext db, int id) => db.Tracks.Where(a => a.MediaTypeId == id));
 
     private static readonly Func<ChinookContext, int, IAsyncEnumerable<Track>> _queryGetTracksByArtistId =
-        EF.CompileAsyncQuery((ChinookContext db, int id) => db.Albums.Where(a => a.ArtistId == id).SelectMany(t => t.Tracks));
+        EF.CompileAsyncQuery((ChinookContext db, int id) =>
+            db.Albums.Where(a => a.ArtistId == id).SelectMany(t => t.Tracks));
 
     private static readonly Func<ChinookContext, int, IAsyncEnumerable<Track>> _queryGetTracksByInvoiceId =
-        EF.CompileAsyncQuery((ChinookContext db, int id) => db.Tracks.Where(c => c.InvoiceLines.Any(o => o.InvoiceId == id)));
+        EF.CompileAsyncQuery((ChinookContext db, int id) =>
+            db.Tracks.Where(c => c.InvoiceLines.Any(o => o.InvoiceId == id)));
 
     private static readonly Func<ChinookContext, int, IAsyncEnumerable<Invoice>> _queryGetInvoicesByEmployeeId =
-        EF.CompileAsyncQuery((ChinookContext db, int id) => db.Customers.Where(a => a.SupportRepId == id).SelectMany(t => t.Invoices));
+        EF.CompileAsyncQuery((ChinookContext db, int id) =>
+            db.Customers.Where(a => a.SupportRepId == id).SelectMany(t => t.Invoices));
 
     private static readonly Func<ChinookContext, int, IAsyncEnumerable<Track>> _queryGetTracksByPlaylistId =
-        EF.CompileAsyncQuery((ChinookContext db, int id) => db.Playlists.Where(a => a.Id == id).SelectMany(t => t.Tracks));
+        EF.CompileAsyncQuery((ChinookContext db, int id) =>
+            db.Playlists.Where(a => a.Id == id).SelectMany(t => t.Tracks));
 
     public virtual DbSet<Album> Albums { get; set; }
 

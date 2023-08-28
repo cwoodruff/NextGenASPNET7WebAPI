@@ -22,7 +22,7 @@ public partial class CustomerApiModel : BaseApiModel, IConvertModel<Customer>
     public virtual ICollection<InvoiceApiModel> Invoices { get; set; } = new List<InvoiceApiModel>();
 
     public virtual EmployeeApiModel? SupportRep { get; set; }
-    
+
     public Customer Convert() =>
         new()
         {

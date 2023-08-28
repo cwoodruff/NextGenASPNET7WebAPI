@@ -27,7 +27,8 @@ public partial class CustomerController : ControllerBase
     [HttpGet]
     [Produces("application/json")]
     [MapToApiVersion("2.0")]
-    public async Task<ActionResult<PagedList<CustomerApiModel>>> Get([FromQuery] int pageNumber, [FromQuery] int pageSize)
+    public async Task<ActionResult<PagedList<CustomerApiModel>>> Get([FromQuery] int pageNumber,
+        [FromQuery] int pageSize)
     {
         try
         {

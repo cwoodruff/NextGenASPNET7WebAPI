@@ -26,13 +26,13 @@ public class AlbumEnricher : Enricher<AlbumApiModel>
             new { id = representation!.Id },
             scheme: "https"
         );
-        
+
         representation.AddLink(new Link
-            {
-                Id = representation.Id.ToString(),
-                Label = $"Album: {representation.Title} #{representation.Id}",
-                Url = url!
-            });
+        {
+            Id = representation.Id.ToString(),
+            Label = $"Album: {representation.Title} #{representation.Id}",
+            Url = url!
+        });
 
         return Task.CompletedTask;
     }

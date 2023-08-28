@@ -20,7 +20,9 @@ public partial class ChinookSupervisor
 
             _cache!.Set(string.Concat("Invoice-", invoice.Id), invoice, (TimeSpan)cacheEntryOptions);
         }
-        var newPagedList = new PagedList<InvoiceApiModel>(invoiceApiModels, invoices.TotalCount, invoices.CurrentPage, invoices.PageSize);
+
+        var newPagedList = new PagedList<InvoiceApiModel>(invoiceApiModels, invoices.TotalCount, invoices.CurrentPage,
+            invoices.PageSize);
         return newPagedList;
     }
 
@@ -53,7 +55,8 @@ public partial class ChinookSupervisor
     {
         var invoices = await _invoiceRepository!.GetByCustomerId(id, pageNumber, pageSize);
         var invoiceApiModels = invoices.ConvertAll();
-        var newPagedList = new PagedList<InvoiceApiModel>(invoiceApiModels.ToList(), invoices.TotalCount, invoices.CurrentPage, invoices.PageSize);
+        var newPagedList = new PagedList<InvoiceApiModel>(invoiceApiModels.ToList(), invoices.TotalCount,
+            invoices.CurrentPage, invoices.PageSize);
         return newPagedList;
     }
 
@@ -96,7 +99,8 @@ public partial class ChinookSupervisor
     {
         var invoices = await _invoiceRepository!.GetByEmployeeId(id, pageNumber, pageSize);
         var invoiceApiModels = invoices.ConvertAll();
-        var newPagedList = new PagedList<InvoiceApiModel>(invoiceApiModels.ToList(), invoices.TotalCount, invoices.CurrentPage, invoices.PageSize);
+        var newPagedList = new PagedList<InvoiceApiModel>(invoiceApiModels.ToList(), invoices.TotalCount,
+            invoices.CurrentPage, invoices.PageSize);
         return newPagedList;
     }
 }

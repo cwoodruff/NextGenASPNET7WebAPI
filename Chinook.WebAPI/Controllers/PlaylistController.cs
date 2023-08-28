@@ -26,7 +26,8 @@ public class PlaylistController : ControllerBase
 
     [HttpGet]
     [Produces("application/json")]
-    public async Task<ActionResult<PagedList<PlaylistApiModel>>> Get([FromQuery] int pageNumber, [FromQuery] int pageSize)
+    public async Task<ActionResult<PagedList<PlaylistApiModel>>> Get([FromQuery] int pageNumber,
+        [FromQuery] int pageSize)
     {
         try
         {

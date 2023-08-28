@@ -30,7 +30,7 @@ public partial class Track : BaseEntity, IConvertModel<TrackApiModel>
     public virtual MediaType MediaType { get; set; } = null!;
 
     public virtual ICollection<Playlist> Playlists { get; set; } = new List<Playlist>();
-    
+
     public TrackApiModel Convert() =>
         new()
         {

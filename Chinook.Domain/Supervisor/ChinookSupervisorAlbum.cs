@@ -21,7 +21,8 @@ public partial class ChinookSupervisor
             _cache!.Set(string.Concat("Album-", album.Id), album, (TimeSpan)cacheEntryOptions);
         }
 
-        var newPagedList = new PagedList<AlbumApiModel>(albumApiModels, albums.TotalCount, albums.CurrentPage, albums.PageSize);
+        var newPagedList =
+            new PagedList<AlbumApiModel>(albumApiModels, albums.TotalCount, albums.CurrentPage, albums.PageSize);
         return newPagedList;
     }
 
@@ -57,7 +58,8 @@ public partial class ChinookSupervisor
     {
         var albums = await _albumRepository!.GetByArtistId(id, pageNumber, pageSize);
         var albumApiModels = albums.ConvertAll<AlbumApiModel>();
-        var newPagedList = new PagedList<AlbumApiModel>(albumApiModels.ToList(), albums.TotalCount, albums.CurrentPage, albums.PageSize);
+        var newPagedList = new PagedList<AlbumApiModel>(albumApiModels.ToList(), albums.TotalCount, albums.CurrentPage,
+            albums.PageSize);
         return newPagedList;
     }
 

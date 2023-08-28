@@ -10,8 +10,8 @@ public abstract class Representation : IRepresentation
         if (exists != null)
         {
             Links.Remove(exists);
-        } 
-        
+        }
+
         Links.Add(link);
         return this;
     }

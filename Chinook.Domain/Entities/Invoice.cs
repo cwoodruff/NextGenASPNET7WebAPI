@@ -24,7 +24,7 @@ public partial class Invoice : BaseEntity, IConvertModel<InvoiceApiModel>
     public virtual Customer Customer { get; set; } = null!;
 
     public virtual ICollection<InvoiceLine> InvoiceLines { get; set; } = new List<InvoiceLine>();
-    
+
     public InvoiceApiModel Convert() =>
         new()
         {

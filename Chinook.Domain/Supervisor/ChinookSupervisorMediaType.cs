@@ -20,7 +20,9 @@ public partial class ChinookSupervisor
 
             _cache!.Set(string.Concat("MediaType-", mediaType.Id), mediaType, (TimeSpan)cacheEntryOptions);
         }
-        var newPagedList = new PagedList<MediaTypeApiModel>(mediaTypeApiModels, mediaTypes.TotalCount, mediaTypes.CurrentPage, mediaTypes.PageSize);
+
+        var newPagedList = new PagedList<MediaTypeApiModel>(mediaTypeApiModels, mediaTypes.TotalCount,
+            mediaTypes.CurrentPage, mediaTypes.PageSize);
         return newPagedList;
     }
 

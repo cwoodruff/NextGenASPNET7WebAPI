@@ -10,7 +10,7 @@ public partial class AlbumApiModel : BaseApiModel, IConvertModel<Album>
     public int? ArtistId { get; set; }
     public virtual ArtistApiModel Artist { get; set; } = null!;
     public virtual ICollection<TrackApiModel> Tracks { get; set; } = new List<TrackApiModel>();
-    
+
     public Album Convert() =>
         new()
         {

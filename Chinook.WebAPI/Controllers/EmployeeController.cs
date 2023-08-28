@@ -26,7 +26,8 @@ public class EmployeeController : ControllerBase
 
     [HttpGet]
     [Produces("application/json")]
-    public async Task<ActionResult<PagedList<EmployeeApiModel>>> Get([FromQuery] int pageNumber, [FromQuery] int pageSize)
+    public async Task<ActionResult<PagedList<EmployeeApiModel>>> Get([FromQuery] int pageNumber,
+        [FromQuery] int pageSize)
     {
         try
         {

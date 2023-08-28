@@ -15,7 +15,7 @@ public class BaseRepository<T> : IRepository<T> where T : BaseEntity
     {
         _context = context;
     }
-    
+
     public void Dispose() => _context.Dispose();
 
     public async Task<bool> EntityExists(int? id) =>
@@ -53,7 +53,7 @@ public class BaseRepository<T> : IRepository<T> where T : BaseEntity
         await _context.SaveChangesAsync();
         return true;
     }
-    
+
     public IQueryable<T> GetByCondition(Expression<Func<T, bool>> expression)
     {
         return _context.Set<T>()

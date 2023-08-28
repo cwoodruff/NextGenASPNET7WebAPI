@@ -35,10 +35,11 @@ public partial class EmployeeApiModel : BaseApiModel, IConvertModel<Employee>
 
     public virtual ICollection<CustomerApiModel> Customers { get; set; } = new List<CustomerApiModel>();
 
-    public virtual ICollection<EmployeeApiModel> InverseReportsToNavigation { get; set; } = new List<EmployeeApiModel>();
+    public virtual ICollection<EmployeeApiModel> InverseReportsToNavigation { get; set; } =
+        new List<EmployeeApiModel>();
 
     public virtual EmployeeApiModel? ReportsToNavigation { get; set; }
-    
+
     public Employee Convert() =>
         new()
         {

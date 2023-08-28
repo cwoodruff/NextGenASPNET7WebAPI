@@ -20,7 +20,9 @@ public partial class ChinookSupervisor
 
             _cache!.Set(string.Concat("Genre-", genre.Id), genre, (TimeSpan)cacheEntryOptions);
         }
-        var newPagedList = new PagedList<GenreApiModel>(genreApiModels, genres.TotalCount, genres.CurrentPage, genres.PageSize);
+
+        var newPagedList =
+            new PagedList<GenreApiModel>(genreApiModels, genres.TotalCount, genres.CurrentPage, genres.PageSize);
         return newPagedList;
     }
 

@@ -38,7 +38,7 @@ public partial class Employee : BaseEntity, IConvertModel<EmployeeApiModel>
     public virtual ICollection<Employee> InverseReportsToNavigation { get; set; } = new List<Employee>();
 
     public virtual Employee? ReportsToNavigation { get; set; }
-    
+
     public EmployeeApiModel Convert() =>
         new()
         {

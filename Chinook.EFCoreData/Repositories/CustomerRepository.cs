@@ -14,7 +14,7 @@ public class CustomerRepository : BaseRepository<Customer>, ICustomerRepository
 
     public async Task<PagedList<Customer>> GetBySupportRepId(int? id, int pageNumber, int pageSize) =>
         await PagedList<Customer>.ToPagedListAsync(_context.Customers.Where(a => a.SupportRepId == id)
-            .AsNoTrackingWithIdentityResolution(),
-        pageNumber,
-        pageSize);
+                .AsNoTrackingWithIdentityResolution(),
+            pageNumber,
+            pageSize);
 }

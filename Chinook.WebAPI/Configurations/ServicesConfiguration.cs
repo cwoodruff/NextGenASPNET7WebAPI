@@ -44,7 +44,7 @@ public static class ServicesConfiguration
             .AddConsole()
             .AddFilter(level => level >= LogLevel.Information)
         );
-        
+
         services.AddHttpLogging(logging =>
         {
             // Customize HTTP logging.
@@ -111,10 +111,11 @@ public static class ServicesConfiguration
             setup.SubstituteApiVersionInUrl = true;
         });
     }
-    
+
     public static void AddSwaggerServices(this IServiceCollection services)
     {
-        services.AddSwaggerGen(options => {
+        services.AddSwaggerGen(options =>
+        {
             // for further customization
             //options.OperationFilter<DefaultValuesFilter>();
         });
@@ -136,14 +137,14 @@ public static class ServicesConfiguration
             }
         );
     }
-    
+
     public static void AddRepresentations(this IServiceCollection services)
     {
-        services .AddScoped<AlbumEnricher>()
+        services.AddScoped<AlbumEnricher>()
             .AddScoped<IEnricher, AlbumEnricher>()
             .AddScoped<AlbumsEnricher>()
             .AddScoped<IListEnricher, AlbumsEnricher>();
-        
+
         services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
         services.AddScoped<RepresentationEnricher>();

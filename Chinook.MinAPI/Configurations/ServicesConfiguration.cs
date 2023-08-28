@@ -36,7 +36,7 @@ public static class ServicesConfiguration
             .AddConsole()
             .AddFilter(level => level >= LogLevel.Information)
         );
-        
+
         services.AddHttpLogging(logging =>
         {
             // Customize HTTP logging.

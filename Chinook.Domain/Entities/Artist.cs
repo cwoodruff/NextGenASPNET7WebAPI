@@ -8,7 +8,7 @@ public partial class Artist : BaseEntity, IConvertModel<ArtistApiModel>
     public string? Name { get; set; }
 
     public virtual ICollection<Album> Albums { get; set; } = new List<Album>();
-    
+
     public ArtistApiModel Convert() =>
         new()
         {

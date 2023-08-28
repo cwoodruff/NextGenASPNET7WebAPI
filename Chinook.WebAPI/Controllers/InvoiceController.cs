@@ -26,7 +26,8 @@ public class InvoiceController : ControllerBase
 
     [HttpGet]
     [Produces("application/json")]
-    public async Task<ActionResult<PagedList<InvoiceApiModel>>> Get([FromQuery] int pageNumber, [FromQuery] int pageSize)
+    public async Task<ActionResult<PagedList<InvoiceApiModel>>> Get([FromQuery] int pageNumber,
+        [FromQuery] int pageSize)
     {
         try
         {
@@ -153,7 +154,8 @@ public class InvoiceController : ControllerBase
 
     [HttpGet("employee/{id}")]
     [Produces("application/json")]
-    public async Task<ActionResult<PagedList<InvoiceApiModel>>> GetByEmployeeId(int id, [FromQuery] int pageNumber, [FromQuery] int pageSize)
+    public async Task<ActionResult<PagedList<InvoiceApiModel>>> GetByEmployeeId(int id, [FromQuery] int pageNumber,
+        [FromQuery] int pageSize)
     {
         try
         {
@@ -186,7 +188,8 @@ public class InvoiceController : ControllerBase
 
     [HttpGet("customer/{id}")]
     [Produces("application/json")]
-    public async Task<ActionResult<PagedList<InvoiceApiModel>>> GetByCustomerId(int id, [FromQuery] int pageNumber, [FromQuery] int pageSize)
+    public async Task<ActionResult<PagedList<InvoiceApiModel>>> GetByCustomerId(int id, [FromQuery] int pageNumber,
+        [FromQuery] int pageSize)
     {
         try
         {

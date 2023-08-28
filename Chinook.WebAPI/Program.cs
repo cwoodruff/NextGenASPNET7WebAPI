@@ -19,10 +19,7 @@ builder.Services.AddSwaggerServices();
 builder.Services.AddProblemDetail();
 builder.Services.AddRepresentations();
 
-builder.Services.AddControllers(cfg =>
-{
-    cfg.Filters.Add<RepresentationEnricher>();
-});
+builder.Services.AddControllers(cfg => { cfg.Filters.Add<RepresentationEnricher>(); });
 
 var app = builder.Build();
 app.UseHttpLogging();
@@ -33,4 +30,6 @@ app.MapControllers();
 
 app.Run();
 
-public partial class Program { }
+public partial class Program
+{
+}

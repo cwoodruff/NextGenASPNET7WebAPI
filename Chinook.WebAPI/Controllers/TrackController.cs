@@ -89,7 +89,9 @@ public class TrackController : ControllerBase
     {
         try
         {
-            return input == null ? StatusCode((int)HttpStatusCode.BadRequest, "Given Track is null") : Ok(await _chinookSupervisor.AddTrack(input));
+            return input == null
+                ? StatusCode((int)HttpStatusCode.BadRequest, "Given Track is null")
+                : Ok(await _chinookSupervisor.AddTrack(input));
         }
         catch (ValidationException ex)
         {
@@ -110,7 +112,9 @@ public class TrackController : ControllerBase
     {
         try
         {
-            return input == null ? StatusCode((int)HttpStatusCode.BadRequest, "Given Track is null") : Ok(await _chinookSupervisor.UpdateTrack(input));
+            return input == null
+                ? StatusCode((int)HttpStatusCode.BadRequest, "Given Track is null")
+                : Ok(await _chinookSupervisor.UpdateTrack(input));
         }
         catch (ValidationException ex)
         {
@@ -143,7 +147,8 @@ public class TrackController : ControllerBase
 
     [HttpGet("artist/{id}")]
     [Produces("application/json")]
-    public async Task<ActionResult<PagedList<TrackApiModel>>> GetByArtistId(int id, [FromQuery] int pageNumber, [FromQuery] int pageSize)
+    public async Task<ActionResult<PagedList<TrackApiModel>>> GetByArtistId(int id, [FromQuery] int pageNumber,
+        [FromQuery] int pageSize)
     {
         try
         {
@@ -176,7 +181,8 @@ public class TrackController : ControllerBase
 
     [HttpGet("invoice/{id}")]
     [Produces("application/json")]
-    public async Task<ActionResult<PagedList<TrackApiModel>>> GetByInvoiceId(int id, [FromQuery] int pageNumber, [FromQuery] int pageSize)
+    public async Task<ActionResult<PagedList<TrackApiModel>>> GetByInvoiceId(int id, [FromQuery] int pageNumber,
+        [FromQuery] int pageSize)
     {
         try
         {
@@ -209,7 +215,8 @@ public class TrackController : ControllerBase
 
     [HttpGet("album/{id}")]
     [Produces("application/json")]
-    public async Task<ActionResult<PagedList<TrackApiModel>>> GetByAlbumId(int id, [FromQuery] int pageNumber, [FromQuery] int pageSize)
+    public async Task<ActionResult<PagedList<TrackApiModel>>> GetByAlbumId(int id, [FromQuery] int pageNumber,
+        [FromQuery] int pageSize)
     {
         try
         {
@@ -217,7 +224,7 @@ public class TrackController : ControllerBase
 
             if (tracks != null && !tracks.Any())
                 return StatusCode((int)HttpStatusCode.NotFound, "No Tracks Could Be Found for the Album");
-            
+
             var metadata = new
             {
                 tracks.TotalCount,
@@ -229,7 +236,6 @@ public class TrackController : ControllerBase
             };
             Response.Headers.Add("X-Pagination", JsonSerializer.Serialize(metadata));
             return Ok(tracks);
-
         }
         catch (Exception ex)
         {
@@ -241,7 +247,8 @@ public class TrackController : ControllerBase
 
     [HttpGet("mediatype/{id}")]
     [Produces("application/json")]
-    public async Task<ActionResult<PagedList<TrackApiModel>>> GetByMediaTypeId(int id, [FromQuery] int pageNumber, [FromQuery] int pageSize)
+    public async Task<ActionResult<PagedList<TrackApiModel>>> GetByMediaTypeId(int id, [FromQuery] int pageNumber,
+        [FromQuery] int pageSize)
     {
         try
         {
@@ -274,7 +281,8 @@ public class TrackController : ControllerBase
 
     [HttpGet("genre/{id}")]
     [Produces("application/json")]
-    public async Task<ActionResult<PagedList<TrackApiModel>>> GetByGenreId(int id, [FromQuery] int pageNumber, [FromQuery] int pageSize)
+    public async Task<ActionResult<PagedList<TrackApiModel>>> GetByGenreId(int id, [FromQuery] int pageNumber,
+        [FromQuery] int pageSize)
     {
         try
         {

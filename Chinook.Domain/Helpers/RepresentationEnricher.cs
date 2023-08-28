@@ -11,7 +11,7 @@ public class RepresentationEnricher : IAsyncResultFilter
     {
         this.enrichers = enrichers;
     }
-    
+
     public async Task OnResultExecutionAsync(ResultExecutingContext context, ResultExecutionDelegate next)
     {
         if (context.Result is ObjectResult result)
@@ -25,6 +25,7 @@ public class RepresentationEnricher : IAsyncResultFilter
                 }
             }
         }
+
         // call this or everything is blank!
         await next();
     }

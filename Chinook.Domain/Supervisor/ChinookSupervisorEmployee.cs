@@ -20,7 +20,9 @@ public partial class ChinookSupervisor
 
             _cache!.Set(string.Concat("Employee-", employee.Id), employee, (TimeSpan)cacheEntryOptions);
         }
-        var newPagedList = new PagedList<EmployeeApiModel>(employeeApiModels, employees.TotalCount, employees.CurrentPage, employees.PageSize);
+
+        var newPagedList = new PagedList<EmployeeApiModel>(employeeApiModels, employees.TotalCount,
+            employees.CurrentPage, employees.PageSize);
         return newPagedList;
     }
 
