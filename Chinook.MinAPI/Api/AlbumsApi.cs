@@ -1,9 +1,4 @@
-using Chinook.Domain.Entities;
-using Chinook.Domain.Extensions;
 using Chinook.Domain.Supervisor;
-using Chinook.EFCoreData.Data;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
 
 namespace Chinook.MinAPI.Api;
 

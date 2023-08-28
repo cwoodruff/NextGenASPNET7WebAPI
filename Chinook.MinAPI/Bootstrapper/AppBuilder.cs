@@ -1,4 +1,3 @@
-using Chinook.EFCoreData.Data;
 using Chinook.MinAPI.Configurations;
 
 namespace Chinook.MinAPI.Bootstrapper;
