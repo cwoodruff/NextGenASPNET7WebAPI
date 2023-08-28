@@ -28,7 +28,6 @@ public static class ServicesConfiguration
     public static void ConfigureSupervisor(this IServiceCollection services)
     {
         services.AddScoped<IChinookSupervisor, ChinookSupervisor>();
-        //services.AddSingleton<IChinookSupervisor, ChinookSupervisor>();
     }
 
     public static void AddAPILogging(this IServiceCollection services)
@@ -53,16 +52,16 @@ public static class ServicesConfiguration
     public static void ConfigureValidators(this IServiceCollection services)
     {
         services.AddFluentValidationAutoValidation()
-            .AddTransient<IValidator<AlbumApiModel>, AlbumValidator>()
-            .AddTransient<IValidator<ArtistApiModel>, ArtistValidator>()
-            .AddTransient<IValidator<CustomerApiModel>, CustomerValidator>()
-            .AddTransient<IValidator<EmployeeApiModel>, EmployeeValidator>()
-            .AddTransient<IValidator<GenreApiModel>, GenreValidator>()
-            .AddTransient<IValidator<InvoiceApiModel>, InvoiceValidator>()
-            .AddTransient<IValidator<InvoiceLineApiModel>, InvoiceLineValidator>()
-            .AddTransient<IValidator<MediaTypeApiModel>, MediaTypeValidator>()
-            .AddTransient<IValidator<PlaylistApiModel>, PlaylistValidator>()
-            .AddTransient<IValidator<TrackApiModel>, TrackValidator>();
+            .AddScoped<IValidator<AlbumApiModel>, AlbumValidator>()
+            .AddScoped<IValidator<ArtistApiModel>, ArtistValidator>()
+            .AddScoped<IValidator<CustomerApiModel>, CustomerValidator>()
+            .AddScoped<IValidator<EmployeeApiModel>, EmployeeValidator>()
+            .AddScoped<IValidator<GenreApiModel>, GenreValidator>()
+            .AddScoped<IValidator<InvoiceApiModel>, InvoiceValidator>()
+            .AddScoped<IValidator<InvoiceLineApiModel>, InvoiceLineValidator>()
+            .AddScoped<IValidator<MediaTypeApiModel>, MediaTypeValidator>()
+            .AddScoped<IValidator<PlaylistApiModel>, PlaylistValidator>()
+            .AddScoped<IValidator<TrackApiModel>, TrackValidator>();
     }
 
     public static void AddCORS(this IServiceCollection services)
