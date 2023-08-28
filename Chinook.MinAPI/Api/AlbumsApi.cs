@@ -13,6 +13,6 @@ public static class AlbumsApi
     {
         app.MapGet("/", async (IChinookSupervisor db) => await db.GetAllAlbum(1, 30));
         
-        app.MapGet("/", async (Func<int, int, Task<PagedList<Album>>> Supervisor) => await Supervisor(1, 30));
+        //app.MapGet("/", async (Func<int, int, Task<PagedList<Album>>> Supervisor) => await Supervisor(1, 30));
     }
 }
