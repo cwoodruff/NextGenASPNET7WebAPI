@@ -7,7 +7,16 @@ var app = AppBuilder.GetApp(args);
 RequestPipelineBuilder.Configure(app);
 
 // Configure APIs 
-AlbumsApi.RegisterApis(app);
+AlbumApi.RegisterApis(app);
+ArtistApi.RegisterApis(app);
+CustomerApi.RegisterApis(app);
+EmployeeApi.RegisterApis(app);
+GenreApi.RegisterApis(app);
+InvoiceApi.RegisterApis(app);
+InvoiceLineApi.RegisterApis(app);
+MediaType.RegisterApis(app);
+PlaylistApi.RegisterApis(app);
+TrackApi.RegisterApis(app);
 
 // Start the app
 app.Run();
