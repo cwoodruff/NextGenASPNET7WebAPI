@@ -1,8 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Chinook.Domain.Converters;
+using Microsoft.EntityFrameworkCore;
 
 namespace Chinook.Domain.Extensions;
 
-public class PagedList<T> : List<T>
+public class PagedList<T> : List<T>, IConvertModel<T>
 {
     public int CurrentPage { get; }
     public int TotalPages { get; }
@@ -34,5 +35,10 @@ public class PagedList<T> : List<T>
         var count = source.Count();
         var items = await source.Skip((pageNumber - 1) * pageSize).Take(pageSize).ToListAsync();
         return new PagedList<T>(items, count, pageNumber, pageSize);
+    }
+    
+    public T Convert()
+    {
+        throw new NotImplementedException();
     }
 }
