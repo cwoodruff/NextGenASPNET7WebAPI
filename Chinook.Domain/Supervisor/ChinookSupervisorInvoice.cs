@@ -78,7 +78,7 @@ public partial class ChinookSupervisor
         var invoice = await _invoiceRepository!.GetById(invoiceApiModel.Id);
 
         if (invoice == null) return false;
-        invoice.Id = invoiceApiModel.Id;
+
         invoice.CustomerId = invoiceApiModel.CustomerId;
         invoice.InvoiceDate = invoiceApiModel.InvoiceDate;
         invoice.BillingAddress = invoiceApiModel.BillingAddress ?? string.Empty;

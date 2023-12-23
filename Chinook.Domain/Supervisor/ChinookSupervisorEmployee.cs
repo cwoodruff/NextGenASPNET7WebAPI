@@ -75,7 +75,7 @@ public partial class ChinookSupervisor
         var employee = await _employeeRepository!.GetById(employeeApiModel.Id);
 
         if (employee == null) return false;
-        employee.Id = employeeApiModel.Id;
+
         employee.LastName = employeeApiModel.LastName;
         employee.FirstName = employeeApiModel.FirstName;
         employee.Title = employeeApiModel.Title ?? string.Empty;

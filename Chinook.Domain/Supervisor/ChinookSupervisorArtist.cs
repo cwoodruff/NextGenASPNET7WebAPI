@@ -69,7 +69,7 @@ public partial class ChinookSupervisor
         var artist = await _artistRepository!.GetById(artistApiModel.Id);
 
         if (artist == null) return false;
-        artist.Id = artistApiModel.Id;
+
         artist.Name = artistApiModel.Name ?? string.Empty;
 
         return await _artistRepository.Update(artist);

@@ -70,7 +70,7 @@ public partial class ChinookSupervisor
         var mediaType = await _mediaTypeRepository!.GetById(mediaTypeApiModel.Id);
 
         if (mediaType == null) return false;
-        mediaType.Id = mediaTypeApiModel.Id;
+
         mediaType.Name = mediaTypeApiModel.Name ?? string.Empty;
 
         return await _mediaTypeRepository.Update(mediaType);

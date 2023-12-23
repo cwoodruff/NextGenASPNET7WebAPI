@@ -81,7 +81,7 @@ public partial class ChinookSupervisor
         var album = await _albumRepository!.GetById(albumApiModel.Id);
 
         if (album is null) return false;
-        album.Id = albumApiModel.Id;
+
         album.Title = albumApiModel.Title;
         album.ArtistId = albumApiModel.ArtistId;
 

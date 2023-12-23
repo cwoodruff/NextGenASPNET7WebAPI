@@ -50,7 +50,7 @@ public partial class ChinookSupervisor
         var track = await _trackRepository!.GetById(trackApiModel.Id);
 
         if (track == null) return false;
-        track.Id = trackApiModel.Id;
+
         track.Name = trackApiModel.Name;
         track.AlbumId = trackApiModel.AlbumId;
         track.MediaTypeId = trackApiModel.MediaTypeId;

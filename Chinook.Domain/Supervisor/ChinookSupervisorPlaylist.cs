@@ -70,7 +70,7 @@ public partial class ChinookSupervisor
         var playlist = await _playlistRepository!.GetById(playlistApiModel.Id);
 
         if (playlist == null) return false;
-        playlist.Id = playlistApiModel.Id;
+
         playlist.Name = playlistApiModel.Name ?? string.Empty;
 
         return await _playlistRepository!.Update(playlist);

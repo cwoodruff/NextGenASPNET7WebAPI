@@ -69,7 +69,7 @@ public partial class ChinookSupervisor
         var genre = await _genreRepository!.GetById(genreApiModel.Id);
 
         if (genre == null) return false;
-        genre.Id = genreApiModel.Id;
+
         genre.Name = genreApiModel.Name ?? string.Empty;
 
         return await _genreRepository.Update(genre);

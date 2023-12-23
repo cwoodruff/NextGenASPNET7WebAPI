@@ -91,7 +91,7 @@ public partial class ChinookSupervisor
         var invoiceLine = await _invoiceLineRepository!.GetById(invoiceLineApiModel.InvoiceId);
 
         if (invoiceLine == null) return false;
-        invoiceLine.Id = invoiceLineApiModel.Id;
+
         invoiceLine.InvoiceId = invoiceLineApiModel.InvoiceId;
         invoiceLine.TrackId = invoiceLineApiModel.TrackId;
         invoiceLine.UnitPrice = invoiceLineApiModel.UnitPrice;
