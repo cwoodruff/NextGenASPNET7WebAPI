@@ -85,7 +85,7 @@ public partial class ChinookContext : DbContext
 
     public IAsyncEnumerable<Track> GetTracksByPlaylistId(int id) => _queryGetTracksByPlaylistId(this, id);
 
-    // 
+    // Delegates
 
     private static readonly Func<ChinookContext, int, Task<bool>> _queryAlbumExists =
         EF.CompileAsyncQuery((ChinookContext db, int id) => db.Albums.Any(a => a.Id == id));
